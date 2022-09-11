@@ -1,0 +1,66 @@
+{% macro tape(values, position, distance=0.15) %}
+\begin{scope}[start chain=1 going right,node distance=-{{ distance }}mm]
+{% for value in values %}
+    \node [on chain=1,tmtape]
+        {%- if loop.index == position -%} (input) {%- endif -%}
+        {{{ value }}};
+{% endfor %}
+    \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1] {\textbf{Fita}};
+\end{scope}
+{% endmacro %}
+
+{% macro control(states, current) %}
+
+{% macro turing_machine(
+    values,
+    position,
+    head,
+    distance=0.15,
+    draw_control=False,
+    states=None,
+) %}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\tikzstyle{every path}=[very thick]
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+\tikzstyle{tmhead}=[arrow box,draw,minimum size=.5cm,arrow box
+arrows={east:.25cm, west:0.25cm}]
+
+{% if draw_control and states is not None%}
+\begin{scope}
+[shift={(3cm,-4cm)},start chain=circle placed {at=(-\tikzchaincount*60:1.5)}]
+{%- for state in states + [r'\ddots'] -%}
+    \node [on chain] { {{- state -} }};
+{%- endfor -%}
+
+% Arrow to current state
+\node (center) {};
+\draw[->] (center) -- (circle-2);
+
+\node[rounded corners,draw=black,thick,fit=(circle-1) (circle-2) (circle-3)
+      (circle-4) (circle-5) (circle-6),
+            label=below:\textbf{Máquina de estados finitos}] (fsbox)
+        {};
+\end{scope}
+{% endif %}
+
+% Draw TM head below (input) tape cell
+\node [tmhead,yshift=-.3cm] at (input.south) (head) {$q_1$};
+
+%% Link Finite Control with Head
+\path[->,draw] (fsbox.north) .. controls (4.5,-1) and (0,-2) .. node[right]
+            (headlinetext)
+			{}
+            (head.south);
+\node[xshift=3cm] at (headlinetext)
+			{\textbf{Cursor de leitura/escrita}};
+
+\end{tikzpicture}
+\end{figure}
+
+{% endmacro %}

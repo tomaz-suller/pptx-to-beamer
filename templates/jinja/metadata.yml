@@ -1,0 +1,18 @@
+classoption: brazil
+theme: Madrid
+colortheme: dolphin
+author:
+    long: R. Rocha
+    short: RR
+institute:
+    long: |
+        Departamento de Engenharia de Computação e Sistemas Digitais \
+        Escola Politécnica da Universidade de São Paulo
+    short: PCS Poli-USP
+nocite: |
+	@*
+lang: pt-BR
+
+title: Máquina de Turing
+subtitle: PCS3616 - Sistemas de Programação
+date: \today

@@ -1,0 +1,4 @@
+python-pptx
+notebook
+python-dotenv
+Jinja2
