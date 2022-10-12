@@ -7,12 +7,12 @@ def get_input_output_dir_parser(
     parser.add_argument(
         'input_dir',
         type=Path,
-        help='Path to directory containing PowerPoint presentations',
+        help='Input directory',
     )
     parser.add_argument(
         'output_dir',
         type=Path,
-        help='Path to save generated Markdown files to',
+        help='Output directory',
     )
 
     return parser

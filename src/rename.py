@@ -1,5 +1,3 @@
-
-
 RENAME_DICT = {
     'Aula01 - Teoria - 2022.pptx'                       : '1-teoria.pptx',
     'Aula01 - Lab - 2022.pptx'                          : '1-lab.pptx',
