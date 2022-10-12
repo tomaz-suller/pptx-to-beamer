@@ -1,5 +1,6 @@
 .vscode
-
-/slides
+.ipynb_checkpoints
 
 __pycache__
+
+/slides
