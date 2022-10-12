@@ -10,9 +10,8 @@ institute:
         Escola Politécnica da Universidade de São Paulo
     short: PCS Poli-USP
 nocite: |
-	@*
+    @*
 lang: pt-BR
 
-title: Máquina de Turing
 subtitle: PCS3616 - Sistemas de Programação
-date: \today
+date: \the\year

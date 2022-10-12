@@ -1,14 +1,19 @@
-.PHONY: all clean
+.PHONY: clean rename convert manual pdf
 
 PANDOCK = docker run --rm -v "$$(pwd):/data" -u $$(id -u):$$(id -g) pandoc/latex
-PANDOCDIR = templates/pandoc/
+PANDOCDIR = .pandoc/
+
+CITATIONSTYLE ?= citation_style.csl
 PANDOCFLAGS = \
 	--from=markdown+rebase_relative_paths \
 	--to=beamer \
-	--include-in-header=$(PANDOCDIR)/preamble.tex \
-	--template=$(PANDOCDIR)/custom.tex \
-	--bibliography=$(PANDOCDIR)/bibliography.bib \
-	--csl=$(PANDOCDIR)/abnt.csl \
+	--data-dir=$(PANDOCDIR) \
+	--resource-path=$(PANDOCDIR) \
+	--include-in-header=preamble.tex \
+	--template=custom.tex \
+	--bibliography=bibliography.bib \
+	--csl=$(CITATIONSTYLE) \
+	--metadata-file=metadata.yaml \
 	--citeproc
 
 pdf: $(foreach path,$(wildcard slides/3_manual/*/out.md),$(addsuffix .pdf,$(subst 3_manual,4_beamer_pdf,$(subst /out.md,,$(path)))))
